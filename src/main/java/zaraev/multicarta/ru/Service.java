@@ -72,7 +72,7 @@ public class Service {
         )) {
             for (Object person : listWithId) {
                 String tempString = (String) person;
-                writer.write(tempString + "\n");
+                writer.write(tempString + ";");
             }
         } catch (IOException e) {
             log.error("Ошибка ввода вывода при записи файла", e);
