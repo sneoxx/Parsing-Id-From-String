@@ -29,7 +29,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args)  {
-        log.debug("Старт программы");
+        log.info("Старт программы");
 
         String example1 = "T1001,, T1002, T1003";
         String example2 = "T1004, , T1005, ";

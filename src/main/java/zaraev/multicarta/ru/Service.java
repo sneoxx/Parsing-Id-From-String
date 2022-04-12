@@ -1,12 +1,14 @@
 package zaraev.multicarta.ru;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,11 +41,11 @@ public class Service {
         }
 
         if(!result.isEmpty()){
-            log.debug("Найдены элементы массива array, удовлетворяющий условию: все id из строки {} " +
-                    " string содержатся в элементе массива array {} ",stringWithId, result);
+            log.debug("findStringWithIdFromStringArray() Найдены элементы массива array, удовлетворяющий условию: все id из строки {} " +
+                    " string содержатся в элементе массива array: {} ",stringWithId, StringUtils.join(result, "|"));
         } else {
-            log.debug("Элементов массива array, удовлетворяющий условию: все id из строки {} " +
-                    " string содержатся в элементе массива array, не найдено {} :",stringWithId, result);
+            log.debug("findStringWithIdFromStringArray() Элементов массива array, удовлетворяющий условию: все id из строки {} " +
+                    " string содержатся в элементе массива array, не найдено: {} ",stringWithId, StringUtils.join(result, "|"));
         }
 
         return result;
@@ -56,7 +58,7 @@ public class Service {
      */
     private static String[] getStringArrayByRegex(String stringWithId) {
         String[] resultArray = stringWithId.replaceAll(",", " ").replaceAll("\\s+", " ").trim().split(" ");
-        log.debug("Строка {} отфильтрована в массив {} :",stringWithId, resultArray);
+        log.debug("getStringArrayByRegex() Строка {} отфильтрована в массив {} :",stringWithId, resultArray);
         return resultArray;
     }
 
@@ -75,9 +77,9 @@ public class Service {
                 writer.write(tempString + ";");
             }
         } catch (IOException e) {
-            log.error("Ошибка ввода вывода при записи файла", e);
+            log.error("writeArrayListToFileCsv() Ошибка ввода вывода при записи файла", e);
             System.out.println(e.getMessage());
         }
-        log.debug("Файл {} успешно записан ", fileName);
+        log.debug("writeArrayListToFileCsv() Файл {} успешно записан ", fileName);
     }
 }
